@@ -3,3 +3,4 @@ cache/
 sound/
 __pycache__/
 .DS_Store
+music/

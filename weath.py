@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
     
 
 def get_weath():
-    
+    '''
     ken=input('住んでいる都道府県を入力(例:東京都):')
     jp_prefs = requests.get('http://weather.livedoor.com/forecast/rss/primary_area.xml').text
 
@@ -20,8 +20,8 @@ def get_weath():
     live_city=int(input('もっとも住んでいるのが近い街を番号で入力(半角数字):'))
 
     city_num = cities[live_city-1]['id']
-    
-    #city_num = '370000'
+    '''
+    city_num = '370000'
     city_weath = requests.get('http://weather.livedoor.com/forecast/webservice/json/v1?city='+city_num)
 
     weath_json = city_weath.json()
