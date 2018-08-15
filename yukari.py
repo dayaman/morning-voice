@@ -1,3 +1,4 @@
+# coding: utf-8
 # ソースはこちらから引用 https://blog.leko.jp/post/voiceloid-like-text2speech/
 import os
 import sys
@@ -89,7 +90,12 @@ def knockAPI(makemsg, msger, whr):
     fp = open(tmp + rawFile, 'wb')
     fp.write(response.content)
     fp.close()
-    
+
+    '''
+    testfile = open("./sound/test.txt", "w")
+    testfile.write(makemsg)
+    testfile.close()
+    '''
     #print("Save Binary Data : " + tmp + rawFile)
     
     

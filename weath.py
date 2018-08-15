@@ -1,5 +1,7 @@
+# coding: utf-8
 import requests
 import json
+import datetime
 from bs4 import BeautifulSoup
     
 
@@ -27,8 +29,15 @@ def get_weath():
     weath_json = city_weath.json()
 
     temp = maketemp(weath_json)
+    now = datetime.datetime.now()
+    month = datetime.datetime.strftime(now, '%m')
+    date = datetime.datetime.strftime(now, '%d')
+    hour = datetime.datetime.strftime(now, '%H')
+    minute = datetime.datetime.strftime(now, '%M')
 
-    msg = weath_json['title'].replace(' ', '、')+'。' \
+    # 日時の書き方が汚いのは文字コードの問題のせい
+    msg = 'おはようございます。'+month+'月'+date+'日、'+hour+'時'+minute+'分です。' \
+    +weath_json['title'].replace(' ', '、')+'。' \
     +weath_json["forecasts"][0]["telop"]+'。' \
     +temp\
     +''.join(weath_json['description']['text'].splitlines()).replace(' ', '')\

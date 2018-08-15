@@ -1,3 +1,4 @@
+# coding: utf-8
 import datetime
 import subprocess
 import weath
@@ -6,10 +7,7 @@ from yukari import knockAPI
 
 firth_msg = weath.get_weath()
 
-now = datetime.datetime.now()
-timemsg = datetime.datetime.strftime(now, 'おはようございます。%m月%d日、%H時%M分です。')
-
-wea_msg = timemsg+firth_msg
+wea_msg = firth_msg
 len_msg = len(wea_msg)
 
 msger = 'sumire'
