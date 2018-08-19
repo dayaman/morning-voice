@@ -30,10 +30,10 @@ def get_weath():
 
     temp = maketemp(weath_json)
     now = datetime.datetime.now()
-    month = datetime.datetime.strftime(now, '%m')
-    date = datetime.datetime.strftime(now, '%d')
-    hour = datetime.datetime.strftime(now, '%H')
-    minute = datetime.datetime.strftime(now, '%M')
+    month = datetime.datetime.strftime(now, '%-m')
+    date = datetime.datetime.strftime(now, '%-d')
+    hour = datetime.datetime.strftime(now, '%-H')
+    minute = datetime.datetime.strftime(now, '%-M')
 
     # 日時の書き方が汚いのは文字コードの問題のせい
     msg = 'おはようございます。'+month+'月'+date+'日、'+hour+'時'+minute+'分です。' \

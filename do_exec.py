@@ -1,9 +1,12 @@
 # coding: utf-8
 import datetime
 import subprocess
+import key
 import weath
+from movie import make_movie
 from pydub import AudioSegment
 from yukari import knockAPI
+
 
 firth_msg = weath.get_weath()
 
@@ -37,6 +40,22 @@ sox ./music/lovers.wav ./music/aft.wav trim {} fade 3 && \
 sox ./music/air.wav ./music/aft.wav ./music/third_ch.wav && \
 sox ./music/third_ch.wav ./music/third.wav fade 0 90 3 && \
 sox ./sound/voiceAir.wav ./sound/nomal/voice.wav ./sound/comp_voice.wav && \
-play -m ./music/fadou.wav ./music/second.wav ./music/third.wav ./sound/comp_voice.wav \
+sox -m ./music/fadou.wav ./music/second.wav ./music/third.wav ./sound/comp_voice.wav ./movie/movie_sound.wav &&\
+play ./movie/movie_sound.wav
 """.format(35+sound_time, 32+sound_time, 32+sound_time)
+# 
 subprocess.check_output(long_cmd, shell=True)
+
+movie_sound = AudioSegment.from_file("./movie/movie_sound.wav", "wav")
+movie_time = int(movie_sound.duration_seconds)
+
+make_movie(movie_time)
+
+mv_cmd = "ffmpeg -y -i ./movie/video.mp4 -i ./movie/movie_sound.wav -vcodec libx264 ./movie/tenki.mp4"
+subprocess.check_output(mv_cmd, shell=True)
+
+video = open('./movie/tenki.mp4', 'rb')
+twitter = key.Twi_API.make_token
+response = twitter.upload_video(media=video, media_type='video/mp4', media_category="tweet_video", check_progress=True)
+twitter.update_status(status="ゆかりん天気予報 (香川県 高松市)\n 立ち絵:MtU先生", media_ids=[response['media_id']])
+video.close()

@@ -1,7 +1,9 @@
 key.py
 cache/
 sound/
+movie/
 __pycache__/
 .DS_Store
 music/
 weath.pyc
+test.py
